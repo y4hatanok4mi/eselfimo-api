@@ -5,6 +5,7 @@ const Task = require('../models/user');
 
 // Signup route
 router.post('/signup', async (req, res) => {
+    const { username, password } = req.body;
     try {
         //validate the request
         if (!req.body.username || !req.body.password) {
@@ -12,7 +13,7 @@ router.post('/signup', async (req, res) => {
         }
         //check if author already exists
         const existingUser = await User.findOne({
-        name: req.body.name,
+        username: req.body.username,
         });
         if (existingUser) {
         return res.status(400).json({ message: "User already exists" });
